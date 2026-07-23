@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { howItWorksSteps } from '../data/how-it-works';
+---
+
+<section class="mx-auto max-w-container px-page py-32 lg:py-40" id="how-it-works">
+  <div class="mx-auto mb-20 max-w-3xl text-center lg:mb-24 lg:max-w-4xl" data-reveal>
+    <h2 class="mb-4 font-display text-3xl font-semibold text-navy md:text-[40px] lg:mb-6 lg:text-[48px]">Cómo Funciona</h2>
+    <div class="mx-auto mb-6 h-1 w-20 bg-turquoise lg:mb-8 lg:w-24"></div>
+  </div>
+  <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-12" data-reveal-group>
+    {
+      howItWorksSteps.map((step) => (
+        <div class="flex flex-col items-center gap-4 text-center lg:gap-5" data-reveal-item>
+          <div class="relative flex h-16 w-16 items-center justify-center rounded-full bg-navy transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
+            <Icon name={step.icon} class="h-7 w-7 text-turquoise lg:h-9 lg:w-9" />
+            <span class="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-turquoise text-sm font-bold text-white lg:h-7 lg:w-7 lg:text-base">
+              {step.step}
+            </span>
+          </div>
+          <h3 class="font-display text-xl font-bold text-navy lg:text-2xl">{step.title}</h3>
+          <p class="text-base leading-relaxed text-on-surface-variant lg:text-lg">{step.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

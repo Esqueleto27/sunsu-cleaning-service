@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  initials: string;
+  name: string;
+  place: string;
+  quote: string;
+}
+
+const { initials, name, place, quote } = Astro.props;
+---
+
+<div
+  class="group relative flex flex-col overflow-hidden rounded-card border border-navy/5 bg-gradient-to-br from-white to-surface-container-low p-9 shadow-ambient transition-all duration-300 hover:-translate-y-2 hover:border-turquoise/20 hover:shadow-2xl hover:shadow-navy/10 lg:p-10"
+  data-reveal-item
+>
+  <div
+    class="absolute top-0 left-0 h-1.5 w-full origin-left scale-x-0 bg-gradient-to-r from-turquoise to-navy transition-transform duration-500 group-hover:scale-x-100"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -top-6 -right-6 h-28 w-28 rounded-full bg-turquoise/[0.07] blur-2xl transition-all duration-500 group-hover:bg-turquoise/[0.14]"
+    aria-hidden="true"
+  >
+  </div>
+  <Icon
+    name="quote"
+    class="absolute top-7 right-7 h-16 w-16 text-turquoise/10 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 group-hover:text-turquoise/20"
+  />
+
+  <div class="relative z-10 mb-5 flex items-center justify-between gap-2">
+    <div class="flex gap-1 rounded-full bg-turquoise/10 px-3 py-1.5">
+      {Array.from({ length: 5 }).map(() => <Icon name="star" class="h-3.5 w-3.5 fill-turquoise text-turquoise" />)}
+    </div>
+    <div
+      class="flex items-center gap-1 rounded-full bg-navy/5 px-3 py-1.5 text-xs font-semibold text-on-surface-variant/70"
+    >
+      <Icon name="verified" class="h-3.5 w-3.5 text-turquoise" />
+      <span>Cliente verificado</span>
+    </div>
+  </div>
+
+  <p class="relative z-10 mb-8 flex-1 text-lg leading-relaxed text-on-surface-variant italic lg:text-xl">"{quote}"</p>
+
+  <div class="relative mt-auto flex items-center gap-4 pt-6">
+    <div class="absolute top-0 left-0 h-px w-full bg-gradient-to-r from-navy/10 via-navy/5 to-transparent"></div>
+    <div
+      class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-turquoise to-navy text-lg font-bold text-white shadow-md shadow-turquoise/20 ring-4 ring-turquoise/10 transition-transform duration-300 group-hover:scale-105 lg:h-14 lg:w-14 lg:text-xl"
+    >
+      {initials}
+    </div>
+    <div>
+      <h3 class="text-lg leading-none font-bold text-navy lg:text-xl">{name}</h3>
+      <p class="mt-1 text-sm font-semibold tracking-wider text-turquoise uppercase lg:text-base">{place}</p>
+    </div>
+  </div>
+</div>

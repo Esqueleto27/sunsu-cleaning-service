@@ -1,0 +1,140 @@
+---
+import '../styles/global.css';
+import { site, socialLinks } from '../data/site';
+import { services } from '../data/services';
+import { testimonials } from '../data/testimonials';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${site.legalName} | Servicios de Limpieza en Quito`, description = site.description } =
+  Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/og-image.jpg', Astro.site);
+const logoURL = new URL('/logo-sunsu.png', Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': `${Astro.site}#business`,
+  name: site.legalName,
+  alternateName: site.name,
+  description: site.description,
+  url: Astro.site,
+  image: ogImage,
+  logo: logoURL,
+  telephone: `+${site.whatsappNumber}`,
+  priceRange: '$$',
+  currenciesAccepted: 'USD',
+  paymentAccepted: 'Efectivo, Transferencia bancaria',
+  availableLanguage: 'Spanish',
+  areaServed: [
+    { '@type': 'City', name: 'Quito' },
+    { '@type': 'City', name: 'Cumbayá' },
+    { '@type': 'City', name: 'Tumbaco' },
+    { '@type': 'City', name: 'Valle de los Chillos' },
+    { '@type': 'City', name: 'Los Chillos' },
+    { '@type': 'City', name: 'Sangolquí' },
+    { '@type': 'City', name: 'Nayón' },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Quito',
+    addressRegion: 'Pichincha',
+    addressCountry: 'EC',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -0.1807,
+    longitude: -78.4678,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  sameAs: socialLinks.map((social) => social.href),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    bestRating: '5',
+    reviewCount: testimonials.length,
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de limpieza Sunsu Cleaning Service',
+    itemListElement: services.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: `Limpieza de ${service.title}`,
+        description: service.description,
+      },
+    })),
+  },
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo-sunsu.png" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="limpieza Quito, servicio de limpieza Quito, limpieza de casas, limpieza de departamentos, limpieza de oficinas, limpieza de edificios, limpieza Cumbayá, limpieza Tumbaco, limpieza Valle de los Chillos, Sunsu Cleaning Service" />
+
+    <meta name="geo.region" content="EC-P" />
+    <meta name="geo.placename" content="Quito, Pichincha, Ecuador" />
+    <meta name="geo.position" content="-0.1807;-78.4678" />
+    <meta name="ICBM" content="-0.1807, -78.4678" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.legalName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_EC" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body class="bg-surface text-on-surface selection:bg-turquoise/20 selection:text-navy">
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-surface" aria-hidden="true">
+      <div
+        class="absolute top-[-12%] left-[-8%] h-[30rem] w-[38rem] rotate-[-8deg] rounded-[60%_40%_55%_45%/45%_55%_40%_60%] bg-turquoise/[0.14] blur-[90px]"
+      >
+      </div>
+      <div
+        class="absolute top-[18%] right-[-14%] h-[24rem] w-[30rem] rotate-[12deg] rounded-[45%_55%_60%_40%/55%_40%_60%_45%] bg-turquoise/[0.10] blur-[90px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-[-16%] left-[12%] h-[26rem] w-[34rem] rotate-[4deg] rounded-[55%_45%_40%_60%/40%_60%_45%_55%] bg-navy/[0.08] blur-[100px]"
+      >
+      </div>
+      <div
+        class="absolute bottom-[10%] right-[8%] h-[16rem] w-[20rem] rotate-[-6deg] rounded-[50%_50%_65%_35%/55%_45%_55%_45%] bg-gold/[0.08] blur-[80px]"
+      >
+      </div>
+    </div>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsappLink } from '../data/site';
+---
+
+<section class="px-page py-24 lg:py-28">
+  <div
+    class="relative mx-auto max-w-container overflow-hidden rounded-card border border-navy/10 bg-surface-container-low p-12 text-center shadow-ambient md:p-24 lg:p-28"
+    data-reveal
+  >
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div
+        class="absolute -top-24 -left-16 h-80 w-96 rotate-[-10deg] rounded-[60%_40%_55%_45%/45%_55%_40%_60%] bg-turquoise/10 blur-[80px]"
+      >
+      </div>
+      <div
+        class="absolute -right-20 -bottom-24 h-96 w-[26rem] rotate-[8deg] rounded-[45%_55%_60%_40%/55%_40%_60%_45%] bg-gold/10 blur-[90px]"
+      >
+      </div>
+    </div>
+
+    <div class="relative z-10 flex flex-col items-center">
+      <div
+        class="mb-6 flex items-center gap-2 rounded-full border border-turquoise/20 bg-turquoise/10 px-4 py-1.5 text-sm font-bold tracking-wide text-navy uppercase lg:mb-8 lg:px-5 lg:py-2 lg:text-base"
+      >
+        <Icon name="whatsapp" class="h-4 w-4 lg:h-5 lg:w-5" />
+        Respuesta inmediata por WhatsApp
+      </div>
+
+      <h2 class="mb-6 font-display text-[40px] font-bold text-navy md:text-[64px] lg:mb-8 lg:text-[72px]">
+        ¿Listo para un espacio <span class="text-turquoise">impecable</span>?
+      </h2>
+      <p class="mb-12 max-w-xl text-xl text-on-surface-variant lg:mb-14 lg:max-w-2xl lg:text-2xl">
+        Agenda tu limpieza profesional hoy mismo. Nuestro equipo está listo para brindarte claridad y bienestar
+        total.
+      </p>
+
+      <div class="flex flex-col items-center gap-5 sm:flex-row lg:gap-6">
+        <a
+          class="flex transform items-center gap-3 rounded-full bg-whatsapp px-10 py-5 text-xl font-bold text-white shadow-2xl transition-all hover:-translate-y-1 hover:bg-whatsapp-dark lg:px-12 lg:py-6 lg:text-2xl"
+          href={whatsappLink('Hola, quisiera agendar una limpieza')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="whatsapp" class="h-6 w-6 lg:h-7 lg:w-7" />
+          Contactar por WhatsApp
+        </a>
+        <a
+          class="flex items-center gap-3 rounded-full border border-navy/20 px-10 py-5 text-xl font-bold text-navy transition-all hover:border-navy/40 hover:bg-navy/5 lg:px-12 lg:py-6 lg:text-2xl"
+          href={`tel:+${site.whatsappNumber}`}
+        >
+          <Icon name="call" class="h-5 w-5 lg:h-6 lg:w-6" />
+          {site.phoneDisplay}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

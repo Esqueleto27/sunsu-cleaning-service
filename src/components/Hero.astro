@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { whatsappLink } from '../data/site';
+import heroImage from '../assets/images/hero.jpg';
+---
+
+<header id="top" class="relative flex min-h-screen items-center overflow-hidden">
+  <div class="absolute inset-0 z-0 overflow-hidden">
+    <div id="hero-parallax" class="absolute inset-0 scale-110">
+      <Image
+        src={heroImage}
+        alt="Interior moderno, luminoso e impecable en Quito"
+        class="h-full w-full object-cover"
+        widths={[640, 1024, 1600, 2000]}
+        sizes="100vw"
+        quality={72}
+        priority
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/60 to-navy/10"></div>
+    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-surface to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 mx-auto w-full max-w-container px-page pt-20">
+    <div class="flex max-w-2xl flex-col items-start gap-6 text-white lg:max-w-3xl lg:gap-8" data-reveal-group>
+      <h1
+        class="font-display text-[44px] leading-[1.15] font-bold tracking-tight md:text-[72px] md:leading-[1.1] lg:text-[84px]"
+        data-reveal-item
+      >
+       <span class="text-turquoise">SUNSU</span> expertos en limpieza en Quito
+      </h1>
+
+      <p class="max-w-xl text-xl leading-relaxed text-white/80 md:text-2xl lg:max-w-2xl lg:text-[28px]" data-reveal-item>
+        Confianza y excelencia en cada detalle, para tu hogar u oficina.
+      </p>
+
+      <div class="mt-4 flex flex-wrap gap-5" data-reveal-item>
+        <a
+          class="flex items-center rounded-full bg-whatsapp px-8 py-4 text-lg font-bold text-white shadow-xl transition-all hover:-translate-y-1 hover:bg-whatsapp-dark lg:px-10 lg:py-5 lg:text-xl"
+          href={whatsappLink('Hola, quisiera solicitar una cotización')}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icon name="whatsapp" class="mr-2 h-5 w-5 lg:h-6 lg:w-6" />
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { animate, scroll } from 'motion';
+
+  const parallax = document.getElementById('hero-parallax');
+  const header = document.getElementById('top');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (parallax && header && !prefersReducedMotion) {
+    scroll(animate(parallax, { transform: ['translateY(0px)', 'translateY(60px)'] }), {
+      target: header,
+      offset: ['start start', 'end start'],
+    });
+  }
+</script>

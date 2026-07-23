@@ -1,0 +1,22 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import { services } from '../data/services';
+---
+
+<section class="bg-surface-container-low py-32 lg:py-40" id="services">
+  <div class="mx-auto max-w-container px-page">
+    <div class="mx-auto mb-16 max-w-3xl text-center lg:mb-20 lg:max-w-4xl" data-reveal>
+      <h2 class="mb-4 font-display text-3xl font-semibold text-navy md:text-[40px] lg:mb-6 lg:text-[48px]">Nuestros Servicios</h2>
+      <div class="mx-auto mb-6 h-1 w-20 bg-turquoise lg:mb-8 lg:w-24"></div>
+      <p class="text-xl text-on-surface-variant lg:text-2xl">
+        Elige el servicio que más necesites, ya sea una limpieza profunda o una limpieza general, para cualquier
+        tipo de espacio. Hoy, muchos clientes ya confían en nosotros para mantener impecables sus oficinas,
+        edificios y hogares.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10" data-reveal-group>
+      {services.map((service) => <ServiceCard {...service} />)}
+    </div>
+  </div>
+</section>

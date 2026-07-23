@@ -1,0 +1,15 @@
+---
+import Icon from './Icon.astro';
+import { whatsappLink } from '../data/site';
+---
+
+<a
+  href={whatsappLink('Hola, quisiera cotizar un servicio de limpieza')}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
+  class="fixed right-6 bottom-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-2xl transition-all hover:-translate-y-1 hover:bg-whatsapp-dark"
+>
+  <span class="absolute inset-0 animate-ping rounded-full bg-whatsapp opacity-75 motion-reduce:hidden"></span>
+  <Icon name="whatsapp" class="relative h-7 w-7" />
+</a>

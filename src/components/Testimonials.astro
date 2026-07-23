@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import TestimonialCard from './TestimonialCard.astro';
+import { testimonials } from '../data/testimonials';
+---
+
+<section class="relative overflow-hidden bg-surface-container-low py-32 lg:py-40" id="reviews">
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div
+      class="absolute top-[-10%] right-[-10%] h-[26rem] w-[32rem] rotate-[10deg] rounded-[55%_45%_60%_40%/45%_55%_40%_60%] bg-turquoise/[0.10] blur-[100px]"
+    >
+    </div>
+    <div
+      class="absolute bottom-[-14%] left-[-8%] h-[22rem] w-[28rem] rotate-[-6deg] rounded-[45%_55%_40%_60%/55%_40%_60%_45%] bg-navy/[0.06] blur-[90px]"
+    >
+    </div>
+  </div>
+  <div class="mx-auto max-w-container px-page">
+    <div class="mx-auto mb-16 max-w-3xl text-center lg:mb-20 lg:max-w-4xl" data-reveal>
+      <div
+        class="mx-auto mb-5 flex w-fit items-center gap-2 rounded-full bg-turquoise/10 px-4 py-1.5 text-sm font-bold text-turquoise lg:mb-6 lg:px-5 lg:py-2 lg:text-base"
+      >
+        {Array.from({ length: 5 }).map(() => <Icon name="star" class="h-3.5 w-3.5 fill-turquoise text-turquoise lg:h-4 lg:w-4" />)}
+        <span>5.0 en satisfacción</span>
+      </div>
+      <h2 class="mb-4 font-display text-3xl font-semibold text-navy md:text-[40px] lg:mb-6 lg:text-[48px]">Lo Que Dicen Nuestros Clientes</h2>
+      <div class="mx-auto mb-6 h-1 w-20 bg-turquoise lg:mb-8 lg:w-24"></div>
+      <p class="text-lg text-on-surface-variant lg:text-xl">
+        La confianza se construye con cada limpieza. Esto es lo que opinan quienes ya viven la diferencia SUNSU.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-10" data-reveal-group>
+      {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
+    </div>
+  </div>
+</section>

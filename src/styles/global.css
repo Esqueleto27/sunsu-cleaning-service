@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
+@import '@fontsource-variable/plus-jakarta-sans';
+
+@theme {
+  /* Brand colors */
+  --color-navy: #0a2e4d;
+  --color-navy-deep: #051a2d;
+  --color-turquoise: #2ba8c4;
+  --color-gold: #d4af37;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+
+  /* Surfaces */
+  --color-surface: #f7f9fb;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #43474e;
+
+  /* Fonts */
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+
+  /* Radii */
+  --radius-card: 24px;
+
+  /* Spacing */
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 64px;
+
+  /* Container */
+  --container-max: 1280px;
+
+  /* Shadows */
+  --shadow-ambient: 0 20px 40px -10px rgba(10, 46, 77, 0.1);
+  --shadow-testimonial: 0 4px 20px rgba(10, 46, 77, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer utilities {
+  .max-w-container {
+    max-width: var(--container-max);
+  }
+
+  .px-page {
+    padding-left: var(--spacing-margin-mobile);
+    padding-right: var(--spacing-margin-mobile);
+  }
+
+  @media (width >= 48rem) {
+    .px-page {
+      padding-left: var(--spacing-margin-desktop);
+      padding-right: var(--spacing-margin-desktop);
+    }
+  }
+
+  @media (width >= 80rem) {
+    .max-w-container {
+      max-width: 1440px;
+    }
+
+    .px-page {
+      padding-left: 80px;
+      padding-right: 80px;
+    }
+  }
+}
+
+/* Reveal-on-scroll baseline: only hide when JS is confirmed running (see Layout.astro inline script),
+   so content stays visible for no-JS/failed-script visitors instead of vanishing permanently. */
+html.js [data-reveal],
+html.js [data-reveal-item] {
+  opacity: 0;
+}

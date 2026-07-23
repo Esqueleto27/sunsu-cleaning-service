@@ -1,0 +1,140 @@
+---
+import Icon from './Icon.astro';
+import { navLinks } from '../data/site';
+---
+
+<nav id="navbar" class="fixed top-0 left-0 z-50 w-full transition-all duration-300" data-reveal>
+  <div class="mx-auto flex max-w-container items-center justify-between px-page py-3 lg:py-4">
+    <a href="#top" class="group flex items-center gap-2 lg:gap-3">
+      <img src="/logo-sunsu.png" alt="Sunsu Cleaning Service" class="h-8 w-8 lg:h-10 lg:w-10" />
+      <span class="logo-text font-display text-lg font-bold tracking-tighter text-white transition-colors lg:text-xl"
+        >SUNSU</span
+      >
+    </a>
+
+    <div class="hidden items-center gap-7 md:flex lg:gap-9">
+      {
+        navLinks.map((link) => (
+          <a
+            class="nav-link nav-underline text-sm font-medium uppercase tracking-wide text-white/90 transition-colors hover:text-turquoise lg:text-base"
+            href={link.href}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="flex items-center gap-3 md:gap-4">
+      <button
+        id="menu-toggle"
+        type="button"
+        class="nav-link flex h-9 w-9 items-center justify-center text-white md:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Icon name="menu" class="h-5 w-5" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 hidden flex-col bg-navy-deep/98 px-page py-8 backdrop-blur-md md:hidden"
+  >
+    <div class="flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="/logo-sunsu.png" alt="Sunsu Cleaning Service" class="h-11 w-11" />
+        <span class="font-display text-2xl font-bold tracking-tighter text-white">SUNSU</span>
+      </a>
+      <button id="menu-close" type="button" class="flex h-10 w-10 items-center justify-center text-white" aria-label="Cerrar menú">
+        <Icon name="close" class="h-6 w-6" />
+      </button>
+    </div>
+    <div class="mt-16 flex flex-col gap-8">
+      {
+        navLinks.map((link) => (
+          <a class="font-display text-3xl font-semibold text-white" href={link.href} data-menu-link>
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav-scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(10, 46, 77, 0.1);
+  }
+  .nav-scrolled .nav-link {
+    color: #43474e;
+  }
+  .nav-scrolled .nav-link:hover {
+    color: #2ba8c4;
+  }
+  .nav-scrolled .logo-text {
+    color: #0a2e4d;
+  }
+
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+</style>
+
+<script>
+  import { animate } from 'motion';
+
+  const navbar = document.getElementById('navbar')!;
+  const menuToggle = document.getElementById('menu-toggle')!;
+  const menuClose = document.getElementById('menu-close')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const menuLinks = mobileMenu.querySelectorAll<HTMLAnchorElement>('[data-menu-link]');
+
+  const setScrolled = () => navbar.classList.toggle('nav-scrolled', window.scrollY > 50);
+  setScrolled();
+  window.addEventListener('scroll', setScrolled, { passive: true });
+
+  function openMenu() {
+    mobileMenu.classList.remove('hidden');
+    mobileMenu.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    menuToggle.setAttribute('aria-expanded', 'true');
+    animate(mobileMenu, { opacity: [0, 1] }, { duration: 0.25 });
+  }
+
+  function closeMenu() {
+    document.body.style.overflow = '';
+    menuToggle.setAttribute('aria-expanded', 'false');
+    animate(mobileMenu, { opacity: [1, 0] }, { duration: 0.2 }).finished.then(() => {
+      mobileMenu.classList.add('hidden');
+      mobileMenu.classList.remove('flex');
+    });
+  }
+
+  menuToggle.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuLinks.forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) closeMenu();
+  });
+</script>

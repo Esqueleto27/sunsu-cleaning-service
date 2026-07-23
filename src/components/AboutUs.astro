@@ -1,0 +1,29 @@
+---
+import Icon from './Icon.astro';
+import { aboutPillars } from '../data/about';
+---
+
+<section class="mx-auto max-w-container px-page py-32 lg:py-40" id="about">
+  <div class="mx-auto mb-20 max-w-3xl text-center lg:mb-24 lg:max-w-4xl" data-reveal>
+    <h2 class="mb-4 font-display text-3xl font-semibold text-navy md:text-[40px] lg:mb-6 lg:text-[48px]">Quiénes Somos</h2>
+    <div class="mx-auto mb-6 h-1 w-20 bg-turquoise lg:mb-8 lg:w-24"></div>
+    <p class="text-xl text-on-surface-variant lg:text-2xl">
+      Somos una empresa de limpieza profesional en Quito. Creemos que un espacio impecable transforma el día a día
+      de las personas, y por eso ponemos el mismo cuidado en un departamento que en un edificio completo:
+      estándares profesionales, atención cercana y compromiso real con cada rincón que limpiamos.
+    </p>
+  </div>
+  <div class="grid grid-cols-2 gap-12 text-center md:grid-cols-4 lg:gap-16" data-reveal-group>
+    {
+      aboutPillars.map((pillar) => (
+        <div class="flex flex-col items-center gap-4 lg:gap-5" data-reveal-item>
+          <div class="flex h-16 w-16 items-center justify-center rounded-full bg-turquoise/10 transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
+            <Icon name={pillar.icon} class="h-8 w-8 text-turquoise lg:h-10 lg:w-10" />
+          </div>
+          <h3 class="font-display text-xl font-bold text-navy lg:text-2xl">{pillar.title}</h3>
+          <p class="text-sm tracking-widest text-on-surface-variant uppercase lg:text-base">{pillar.subtitle}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
